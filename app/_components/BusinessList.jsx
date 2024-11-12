@@ -9,7 +9,7 @@ const BusinessList = ({ businessList, title }) => {
             </h2>
             <div className="grid grid-cols-2
             md:grid-cols-3 lg:grid-cols-4 gap-6 mt-5">
-                {businessList.map((business, index) => (
+                {businessList.length > 0 ? businessList.map((business, index) => (
                     <div key={index} className='shadow-md rounded-lg 
                 hover:shadow-lg cursor-pointer hover:shadow-primary
                 hover:scale-105 transition-all erase-in-out'>
@@ -28,6 +28,10 @@ const BusinessList = ({ businessList, title }) => {
                             <Button className="rounded-lg mt-3">Book Now</Button>
                         </div>
                     </div>
+                )):
+                [1, 2, 3, 4].map((item, index) => (
+                    <div key={index} className='w-full h-[300px] bg-slate-200
+                    rounded-lg animate-pulse'></div>
                 ))}
             </div>
         </div>
