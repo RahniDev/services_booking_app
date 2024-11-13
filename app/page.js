@@ -8,7 +8,7 @@ import Hero from './_components/Hero'
 export default function Home() {
   const [categoryList, setCategoryList] = useState([])
   const [businessList, setBusinessList] = useState([])
-
+ 
   useEffect(() => {
     getCategoryList()
     getAllBusinessList()

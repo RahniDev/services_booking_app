@@ -13,7 +13,7 @@ const Header = () => {
             <li className='hover:scale-105 hover:text-primary'>About Us</li>
         </ul>
     </div>
-    <div><Button>Get Started</Button></div>
+    <div><Button>Log In / Sign Up</Button></div>
     </div>
   )
 }
