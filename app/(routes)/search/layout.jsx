@@ -1,9 +1,11 @@
+import CategorySidebar from "./_components/CatSidebar"
+
 const layout = ({children}) => {
   return (
     <div>
-        <div className="grid grid-cols-4">
+        <div className="grid grid-cols-4 mt-8">
             <div className="">
-                {/* Categories sidebar */}
+               <CategorySidebar />
             </div>
             <div className="col-span-3">
             {children}
