@@ -1,14 +1,28 @@
 "use client"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useParams } from 'next/navigation'
+import GlobalApi from "@/app/_services/GlobalApi"
+import BusinessList from "@/app/_components/BusinessList"
 
 const BusinessByCategory = () => {
+  const [businessList, setBusinessList] = useState([])
   const params = useParams()
   useEffect(() => {
     console.log(params)
+    params&&getBusinessList()
   }, [params])
+
+  const getBusinessList = () => {
+    GlobalApi.getBusinessByCategory(params.category)
+      .then(resp => {
+        setBusinessList(resp?.businessLists)
+      })
+  }
   return (
-    <div></div>
+    <div>
+      <BusinessList title={params.category} 
+      businessList={businessList} />
+    </div>
   )
 }
 
