@@ -62,8 +62,31 @@ query MyQuery {
   return result
 }
 
+const getBusinessById = async (id) => {
+  const query = gql`
+  query GetBusinessById {
+  businessList(where: {id: "`+id+`"}) {
+    about
+    address
+    category {
+      name
+    }
+    contactPerson
+    email
+    id
+    name
+    images {
+      url
+    }
+  }
+}`
+const result = await request(MASTER_URL, query)
+return result
+}
+
 export default {
   getCategory,
   getAllBusinessList,
-  getBusinessByCategory
+  getBusinessByCategory,
+  getBusinessById
 }

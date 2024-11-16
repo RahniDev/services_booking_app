@@ -7,9 +7,9 @@ import BusinessList from "@/app/_components/BusinessList"
 const BusinessByCategory = () => {
   const [businessList, setBusinessList] = useState([])
   const params = useParams()
+
   useEffect(() => {
-    console.log(params)
-    params&&getBusinessList()
+    params && getBusinessList()
   }, [params])
 
   const getBusinessList = () => {
@@ -20,8 +20,8 @@ const BusinessByCategory = () => {
   }
   return (
     <div>
-      <BusinessList title={params.category} 
-      businessList={businessList} />
+      <BusinessList title={params.category}
+        businessList={businessList} />
     </div>
   )
 }

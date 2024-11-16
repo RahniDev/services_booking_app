@@ -33,6 +33,7 @@ const CategorySidebar = () => {
       rounded-lg mb-3 md:mr-10 cursor-pointer hover:bg-blue-50
       hover:text-primary hover:border-primary hover:shadow-md
       items-center
+      
       ${selectedCategory == category.name &&
               'border-primary text-primary shadow-md bg-blue-50'}
         `}>
