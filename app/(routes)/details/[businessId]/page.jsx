@@ -2,9 +2,9 @@
 import { useEffect, useState } from "react"
 import GlobalApi from "@/app/_services/GlobalApi"
 import { useParams } from "next/navigation"
-const { default: GlobalApi } = require("@/app/_services/GlobalApi")
+import BusinessInfo from "../_components/BusinessInfo"
 
-const BusinessInfo = () => {
+const BusinessDetails = () => {
     const [business, setBusiness] = useState([])
     const params = useParams()
 
@@ -14,12 +14,14 @@ const BusinessInfo = () => {
     const getBusinessById = () => {
         GlobalApi.getBusinessById(params.businessId)
             .then(resp => {
-                console.log('getbusinessbyid')
+                setBusiness(resp.businessList)
             })
     }
-    return (
-        <div>Business</div>
+    return business && (
+        <div className="py-8 md:py-20 px-10 md:px-36">
+            <BusinessInfo business={business} />
+        </div>
     )
 }
 
-export default BusinessInfo
+export default BusinessDetails

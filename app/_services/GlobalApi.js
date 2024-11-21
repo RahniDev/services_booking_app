@@ -65,7 +65,7 @@ query MyQuery {
 const getBusinessById = async (id) => {
   const query = gql`
   query GetBusinessById {
-  businessList(where: {id: "`+id+`"}) {
+  businessList(where: {id: "`+ id +`"}) {
     about
     address
     category {
