@@ -13,6 +13,7 @@ import { Calendar } from "@/components/ui/calendar"
 const BookingAppointment = ({ children }) => {
     const [date, setDate] = useState(new Date())
     const [timeSlot, setTimeSlot] = useState([])
+    const [selectedTime, setSelectedTime] = useState()
 
     useEffect(() => {
         getTime()
@@ -65,10 +66,18 @@ const BookingAppointment = ({ children }) => {
                                 {timeSlot.map((item, index) => (
                                     <Button key={index}
                                     variant='outline'
-                                    className='border rounded-full p-2 px-3'>
+                                    className={`border rounded-full p-2 px-3
+                                     hover:bg-primary hover:text-white
+                                     ${selectedTime==item.time&&'bg-primary text-white'}`}
+                                    onClick={() => setSelectedTime(item.time)}>       
                                         {item.time}
                                     </Button>
                                 ))}
+                                </div>
+                                <div className='flex justify-between'>
+                                <Button variant='outline' className="my-5">Cancel</Button>
+                                <Button className="my-5"
+                                disabled={!(selectedTime&&date)}>Book</Button>
                                 </div>
                         </SheetDescription>
                     </SheetHeader>
