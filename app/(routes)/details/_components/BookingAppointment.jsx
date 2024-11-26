@@ -40,6 +40,9 @@ const BookingAppointment = ({ children }) => {
         setTimeSlot(timeList)
     }
 
+    const saveBooking = () => {
+        
+    }
 
     return (
         <div>
@@ -77,7 +80,8 @@ const BookingAppointment = ({ children }) => {
                                 <div className='flex justify-between'>
                                 <Button variant='outline' className="my-5">Cancel</Button>
                                 <Button className="my-5"
-                                disabled={!(selectedTime&&date)}>Book</Button>
+                                disabled={!(selectedTime&&date)}
+                                onClick={() => saveBooking()}>Book</Button>
                                 </div>
                         </SheetDescription>
                     </SheetHeader>

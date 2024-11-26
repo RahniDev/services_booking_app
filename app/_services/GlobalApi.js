@@ -65,7 +65,7 @@ query MyQuery {
 const getBusinessById = async (id) => {
   const query = gql`
   query GetBusinessById {
-  businessList(where: {id: "`+ id +`"}) {
+  businessList(where: {id: "`+ id + `"}) {
     about
     address
     category {
@@ -80,13 +80,31 @@ const getBusinessById = async (id) => {
     }
   }
 }`
-const result = await request(MASTER_URL, query)
-return result
+  const result = await request(MASTER_URL, query)
+  return result
 }
+
+const createBooking = async (businessId, date, time,
+  userEmail, userName
+) => {
+  const mutationQuery = gql`
+  mutation CreateBooking {
+  createBooking(
+    data: {businessList: {connect: {id: "`+ businessId + `"}}, date: "` + date + `", time: "` + time + `", userEmail: "` + userEmail + `", userName: "` + userName + `"}
+  ) {
+    id
+  }
+}
+  `
+  const result = await request(MASTER_URL, mutationQuery)
+  return result
+}
+
 
 export default {
   getCategory,
   getAllBusinessList,
   getBusinessByCategory,
-  getBusinessById
+  getBusinessById,
+  createBooking
 }
