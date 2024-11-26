@@ -4,6 +4,8 @@ import { NotebookPen } from "lucide-react"
 import GlobalApi from "@/app/_services/GlobalApi"
 import Image from "next/image"
 import Link from "next/link"
+import BookingAppointment from "./BookingAppointment"
+
 
 const SuggestedServices = ({ business }) => {
   const [businessList, setBusinessList] = useState([])
@@ -21,10 +23,12 @@ const SuggestedServices = ({ business }) => {
 
   return (
     <div className="md:pl-10">
-      <Button className="flex gap-2 w-full">
+     <BookingAppointment>
+     <Button className="flex gap-2 w-full">
         <NotebookPen />
         Book Appointment
       </Button>
+     </BookingAppointment>
       <div className="hidden md:block">
         <h2 className="font-bold text-lg mt-3 mb-3">
           Similar Businesses</h2>
