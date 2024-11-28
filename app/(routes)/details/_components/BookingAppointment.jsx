@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import {Button} from '@/components/ui/button'
+import { Button } from '@/components/ui/button'
 import {
     Sheet,
     SheetContent,
@@ -9,11 +9,14 @@ import {
     SheetTrigger,
 } from "@/components/ui/sheet"
 import { Calendar } from "@/components/ui/calendar"
+import GlobalApi from '@/app/_services/GlobalApi'
+import { toast } from "sonner"
 
-const BookingAppointment = ({ children }) => {
+const BookingAppointment = ({ children, business }) => {
     const [date, setDate] = useState(new Date())
     const [timeSlot, setTimeSlot] = useState([])
     const [selectedTime, setSelectedTime] = useState()
+    // Get user info
 
     useEffect(() => {
         getTime()
@@ -41,7 +44,16 @@ const BookingAppointment = ({ children }) => {
     }
 
     const saveBooking = () => {
-        
+        GlobalApi.createBooking(business.id,
+            date, selectedTime)
+            .then(resp => {
+                console.log(resp)
+                if (resp) {
+                    toast('Service booked successfully.')
+                } else (e) => {
+                    toast('Error while creating booking.')
+                }
+            })
     }
 
     return (
@@ -63,26 +75,26 @@ const BookingAppointment = ({ children }) => {
                                     onSelect={setDate}
                                     className="rounded-md border"
                                 />
-                                  </div>
-                                  <h2 className='my-5 font-bold'>Select Time Slot</h2>
-                                <div className='grid grid-cols-3 gap-3'>
+                            </div>
+                            <h2 className='my-5 font-bold'>Select Time Slot</h2>
+                            <div className='grid grid-cols-3 gap-3'>
                                 {timeSlot.map((item, index) => (
                                     <Button key={index}
-                                    variant='outline'
-                                    className={`border rounded-full p-2 px-3
+                                        variant='outline'
+                                        className={`border rounded-full p-2 px-3
                                      hover:bg-primary hover:text-white
-                                     ${selectedTime==item.time&&'bg-primary text-white'}`}
-                                    onClick={() => setSelectedTime(item.time)}>       
+                                     ${selectedTime == item.time && 'bg-primary text-white'}`}
+                                        onClick={() => setSelectedTime(item.time)}>
                                         {item.time}
                                     </Button>
                                 ))}
-                                </div>
-                                <div className='flex justify-between'>
+                            </div>
+                            <div className='flex justify-between'>
                                 <Button variant='outline' className="my-5">Cancel</Button>
                                 <Button className="my-5"
-                                disabled={!(selectedTime&&date)}
-                                onClick={() => saveBooking()}>Book</Button>
-                                </div>
+                                    disabled={!(selectedTime && date)}
+                                    onClick={() => saveBooking()}>Book</Button>
+                            </div>
                         </SheetDescription>
                     </SheetHeader>
                 </SheetContent>

@@ -23,7 +23,7 @@ const SuggestedServices = ({ business }) => {
 
   return (
     <div className="md:pl-10">
-     <BookingAppointment>
+     <BookingAppointment business={business}>
      <Button className="flex gap-2 w-full">
         <NotebookPen />
         Book Appointment
@@ -37,7 +37,8 @@ const SuggestedServices = ({ business }) => {
             <Link href={'/details/' + business.id}
               className="flex gap-2 mb-4
           cursor-pointer hover:shadow-md
-          hover:border border-primary rounded-lg p-2">
+          hover:border border-primary rounded-lg p-2"
+          key={index}>
               <Image src={business?.images[0].url}
                 alt={business.name}
                 width={80}
