@@ -16,7 +16,7 @@ const BookingAppointment = ({ children, business }) => {
     const [date, setDate] = useState(new Date())
     const [timeSlot, setTimeSlot] = useState([])
     const [selectedTime, setSelectedTime] = useState()
-    // Get user info
+    const [bookedSlot, setBookedSlot] = useState([])
 
     useEffect(() => {
         getTime()
@@ -27,11 +27,16 @@ const BookingAppointment = ({ children, business }) => {
     useEffect(() => {
         date && BusinessBookedSlot()
     }, [date])
+
+    // Get all booked slots on the selected date
     const BusinessBookedSlot = () => {
         GlobalApi.businessBookedSlot(business.id, date)
             .then(resp => {
-                console.log(resp)
+                setBookedSlot(resp.bookings)
             })
+    }
+    const isSlotBooked = (time) => {
+        return bookedSlot.find(item => item.time == time)
     }
 
     const getTime = () => {
@@ -94,6 +99,7 @@ const BookingAppointment = ({ children, business }) => {
                             <div className='grid grid-cols-3 gap-3'>
                                 {timeSlot.map((item, index) => (
                                     <Button key={index}
+                                        disabled={isSlotBooked(item.time)}
                                         variant='outline'
                                         className={`border rounded-full p-2 px-3
                                      hover:bg-primary hover:text-white
