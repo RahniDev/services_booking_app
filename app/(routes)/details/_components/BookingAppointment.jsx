@@ -20,7 +20,20 @@ const BookingAppointment = ({ children, business }) => {
 
     useEffect(() => {
         getTime()
+        setDate()
+        setSelectedTime('')
     }, [])
+
+    useEffect(() => {
+        date && BusinessBookedSlot()
+    }, [date])
+    const BusinessBookedSlot = () => {
+        GlobalApi.businessBookedSlot(business.id, date)
+            .then(resp => {
+                console.log(resp)
+            })
+    }
+
     const getTime = () => {
         const timeList = [];
         for (let i = 10; i <= 12; i++) {
@@ -47,8 +60,9 @@ const BookingAppointment = ({ children, business }) => {
         GlobalApi.createBooking(business.id,
             date, selectedTime)
             .then(resp => {
-                console.log(resp)
                 if (resp) {
+                    setDate()
+                    setSelectedTime('')
                     toast('Service booked successfully.')
                 } else (e) => {
                     toast('Error while creating booking.')

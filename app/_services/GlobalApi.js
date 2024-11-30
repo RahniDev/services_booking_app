@@ -103,11 +103,22 @@ const createBooking = async (businessId, date, time,
   return result
 }
 
-
+const businessBookedSlot = async (businessId, date) => {
+  const query = gql`
+  query BusinessBookedSlot {
+  bookings(where: {id: "`+businessId+`", date: "`+date+`"}) {
+    date
+    time
+  }
+}`
+  const result = await request(MASTER_URL, query)
+  return result
+}
 export default {
   getCategory,
   getAllBusinessList,
   getBusinessByCategory,
   getBusinessById,
-  createBooking
+  createBooking,
+  businessBookedSlot
 }
