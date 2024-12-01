@@ -3,30 +3,38 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import BookingHistoryList from "./_components/BookingHistoryList"
 import GlobalApi from "@/app/_services/GlobalApi"
-import {useSession} from 'next-auth/react'
+import { useSession } from 'next-auth/react'
+import { useState, useEffect } from 'react'
 
 const MyBookings = () => {
-    const { data } = useSession()
+    const [bookingHistory, setBookingHistory] = useState([])
+
+    // auth yet to be done
+    // const { data } = useSession()
 
     useEffect(() => {
-        data && getUserBookingHistory()
-    }, [data])
+        // data &&
+         getUserBookingHistory()
+    })
+    // }, [data])
 
     const getUserBookingHistory = () => {
-        GlobalApi.getUserBookingHistory(data.user.email).then(resp => {
+        // data.user.email
+        GlobalApi.getUserBookingHistory('email@email.com').then(resp => {
             console.log(resp)
+            setBookingHistory(resp.bookings)
         })
     }
     return (
         <div className="my-10 mx-5 md:mx-36">
             <h1>My Bookings</h1>
-            <Tabs defaultValue="account" className="w-full">
+            <Tabs defaultValue="booked" className="w-full">
                 <TabsList className="w-full justify-start">
                     <TabsTrigger value="booked">Booked</TabsTrigger>
                     <TabsTrigger value="completed">Completed</TabsTrigger>
                 </TabsList>
                 <TabsContent value="booked">
-                    <BookingHistoryList />
+                    <BookingHistoryList bookingHistory={bookingHistory} />
                 </TabsContent>
                 <TabsContent value="completed">
 
