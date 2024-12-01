@@ -3,15 +3,13 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import BookingHistoryList from "./_components/BookingHistoryList"
 import GlobalApi from "@/app/_services/GlobalApi"
-import { useSession } from 'next-auth/react'
 import { useState, useEffect } from 'react'
 
 const MyBookings = () => {
     const [bookingHistory, setBookingHistory] = useState([])
-
+    const { user } = useUser()
     // auth yet to be done
     // const { data } = useSession()
-
     useEffect(() => {
         // data &&
         getUserBookingHistory()

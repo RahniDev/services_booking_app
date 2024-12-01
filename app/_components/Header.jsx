@@ -1,6 +1,7 @@
 "use client"
 import Image from 'next/image'
-import {Button} from '@/components/ui/button'
+import Link from 'next/link'
+// import {Button} from '@/components/ui/button'
 
 const Header = () => {
   return (
@@ -13,7 +14,7 @@ const Header = () => {
             <li className='hover:scale-105 hover:text-primary'>About Us</li>
         </ul>
     </div>
-    <div><Button>Log In / Sign Up</Button></div>
+    <div><Link href='/sign-in'>Log In / Sign Up</Link></div>
     </div>
   )
 }
