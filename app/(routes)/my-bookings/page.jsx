@@ -14,8 +14,8 @@ const MyBookings = () => {
 
     useEffect(() => {
         // data &&
-         getUserBookingHistory()
-    })
+        getUserBookingHistory()
+    }, [])
     // }, [data])
 
     const getUserBookingHistory = () => {
@@ -24,6 +24,16 @@ const MyBookings = () => {
             console.log(resp)
             setBookingHistory(resp.bookings)
         })
+    }
+
+    // Filter past bookings and future bookings
+    const filterData = (type) => {
+        const result = bookingHistory.filter(item =>
+            type == 'booked' ?
+                new Date(item.date) > new Date() :
+                new Date(item.date) < new Date())
+
+        return result
     }
     return (
         <div className="my-10 mx-5 md:mx-36">
@@ -34,10 +44,10 @@ const MyBookings = () => {
                     <TabsTrigger value="completed">Completed</TabsTrigger>
                 </TabsList>
                 <TabsContent value="booked">
-                    <BookingHistoryList bookingHistory={bookingHistory} />
+                    <BookingHistoryList bookingHistory={filterData('booked')} />
                 </TabsContent>
                 <TabsContent value="completed">
-
+                    <BookingHistoryList bookingHistory={filterData('completed')} />
                 </TabsContent>
             </Tabs>
         </div>
