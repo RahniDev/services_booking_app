@@ -1,9 +1,12 @@
 "use client"
 import Image from 'next/image'
 import Link from 'next/link'
-// import {Button} from '@/components/ui/button'
+import { useSession, useUser } from '@descope/nextjs-sdk/client';
 
 const Header = () => {
+  const {isAuthenticated} = useSession()
+  const {user} = useUser()
+
   return (
     <div className="p-5 shadow-sm flex justify-between">
     <div className='flex items-center gap-8'>
@@ -14,9 +17,11 @@ const Header = () => {
             <li className='hover:scale-105 hover:text-primary'>About Us</li>
         </ul>
     </div>
-    <div><Link href='/sign-in'>Log In / Sign Up</Link></div>
+    {isAuthenticated ? (
+   <div><p>{user?.name}</p></div>
+  ): (<div><Link href='/sign-in'>Log In / Sign Up</Link></div>)}
     </div>
   )
-}
+  }
 
 export default Header
