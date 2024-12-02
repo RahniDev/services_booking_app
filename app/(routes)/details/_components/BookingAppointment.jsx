@@ -12,6 +12,7 @@ import { Calendar } from "@/components/ui/calendar"
 import GlobalApi from '@/app/_services/GlobalApi'
 import { toast } from "sonner"
 import moment from 'moment'
+import { useUser, useSession } from '@descope/nextjs-sdk/client'
 
 const BookingAppointment = ({ children, business }) => {
     const [date, setDate] = useState(new Date())
@@ -19,6 +20,8 @@ const BookingAppointment = ({ children, business }) => {
     const [selectedTime, setSelectedTime] = useState()
     const [bookedSlot, setBookedSlot] = useState([])
 
+    const {user} = useUser()
+    const {isAuthenticated} = useSession()
     useEffect(() => {
         getTime()
         setDate()
@@ -26,13 +29,14 @@ const BookingAppointment = ({ children, business }) => {
     }, [])
 
     useEffect(() => {
-        date && BusinessBookedSlot()
+        date && businessBookedSlot()
     }, [date])
 
     // Get all booked slots on the selected date
-    const BusinessBookedSlot = () => {
+    const businessBookedSlot = () => {
         GlobalApi.businessBookedSlot(business.id, moment(date).format('DD-MMM-yyyy'))
             .then(resp => {
+               console.log(resp) 
                 setBookedSlot(resp.bookings)
             })
     }
@@ -64,7 +68,10 @@ const BookingAppointment = ({ children, business }) => {
 
     const saveBooking = () => {
         GlobalApi.createBooking(business.id,
-            moment(date).format('DD-MMM-yyyy'), selectedTime)
+            moment(date).format('DD-MMM-yyyy'), selectedTime,
+            user.email,
+            user.name
+        )
             .then(resp => {
                 if (resp) {
                     setDate()

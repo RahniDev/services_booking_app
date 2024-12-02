@@ -18,7 +18,7 @@ const MyBookings = () => {
     }, [isAuthenticated])
 
     const getUserBookingHistory = () => {
-        GlobalApi.getUserBookingHistory(user?.email).then(resp => {
+        GlobalApi.getUserBookingHistory(user.email).then(resp => {
             console.log(resp)
             setBookingHistory(resp.bookings)
         })

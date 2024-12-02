@@ -90,9 +90,11 @@ const createBooking = async (businessId, date, time,
   const mutationQuery = gql`
   mutation CreateBooking {
   createBooking(
-    data: {businessList: {connect: {id: "`+ businessId + `"}}, date: "` + date + `", time: "` + time + `",
-    userEmail: "`+userEmail+`",
-    userName: "`+userName+`"}
+    data: {businessList: {connect: {id: "`+ businessId + `"}},
+     date: "` + date + `", 
+     time: "` + time + `",
+    userEmail: "`+ userEmail + `",
+    userName: "`+ userName + `"}
   ) {
     id
   }
@@ -108,7 +110,9 @@ const createBooking = async (businessId, date, time,
 const businessBookedSlot = async (businessId, date) => {
   const query = gql`
   query BusinessBookedSlot {
-  bookings(where: {id: "`+ businessId + `", date: "` + date + `"}) {
+  bookings(where: {businessList:
+ {id: "`+ businessId + `"},
+   date: "` + date + `"}) {
     date
     time
   }
@@ -128,9 +132,11 @@ const getUserBookingHistory = async (userEmail) => {
         url
       }
       contactPerson
+      address
     }
     date
     time
+    id
   }
 }`
   const result = await request(MASTER_URL, query)

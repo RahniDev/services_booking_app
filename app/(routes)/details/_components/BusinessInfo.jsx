@@ -24,7 +24,6 @@ const BusinessInfo = ({ business }) => {
       </div>
 
       <div className="flex flex-col gap-5 items-end">
-        <Button><Share /></Button>
         <p className="flex gap-2 text-xl text-primary"><User />{business.contactPerson}</p>
         <p className="flex gap-2 text-xl text-gray-500"><Clock />Available 8:00 AM to 9:00 PM</p>
 

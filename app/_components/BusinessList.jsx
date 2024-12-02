@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 
 const BusinessList = ({ businessList, title }) => {
@@ -25,14 +26,15 @@ const BusinessList = ({ businessList, title }) => {
                             <h2 className='font-bold text-lg'>{business.name}</h2>
                             <p className='text-primary'>{business.contactPerson}</p>
                             <p className='text-gray-500 text-sm'>{business.address}</p>
-                            <Button className="rounded-lg mt-3">Book Now</Button>
+                            <Button className="rounded-lg mt-3">
+                                <Link href={"/details/" + business.id}>Book Now</Link></Button>
                         </div>
                     </div>
-                )):
-                [1, 2, 3, 4].map((item, index) => (
-                    <div key={index} className='w-full h-[300px] bg-slate-200
+                )) :
+                    [1, 2, 3, 4].map((item, index) => (
+                        <div key={index} className='w-full h-[300px] bg-slate-200
                     rounded-lg animate-pulse'></div>
-                ))}
+                    ))}
             </div>
         </div>
     )
