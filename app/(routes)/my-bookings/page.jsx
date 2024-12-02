@@ -4,23 +4,21 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import BookingHistoryList from "./_components/BookingHistoryList"
 import GlobalApi from "@/app/_services/GlobalApi"
 import { useState, useEffect } from 'react'
-import { useDescope, useSession, useUser } from '@descope/nextjs-sdk/client';
+import { useSession, useUser } from '@descope/nextjs-sdk/client';
 
 const MyBookings = () => {
     const [bookingHistory, setBookingHistory] = useState([])
+
     const { user } = useUser()
     const {isAuthenticated} = useSession()
-    // auth yet to be done
-    // const { data } = useSession()
+
     useEffect(() => {
-        // data &&
+        isAuthenticated &&
         getUserBookingHistory()
-    }, [])
-    // }, [data])
+    }, [isAuthenticated])
 
     const getUserBookingHistory = () => {
-        // data.user.email
-        GlobalApi.getUserBookingHistory('email@email.com').then(resp => {
+        GlobalApi.getUserBookingHistory(user?.email).then(resp => {
             console.log(resp)
             setBookingHistory(resp.bookings)
         })

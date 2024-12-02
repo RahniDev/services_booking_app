@@ -11,6 +11,7 @@ import {
 import { Calendar } from "@/components/ui/calendar"
 import GlobalApi from '@/app/_services/GlobalApi'
 import { toast } from "sonner"
+import moment from 'moment'
 
 const BookingAppointment = ({ children, business }) => {
     const [date, setDate] = useState(new Date())

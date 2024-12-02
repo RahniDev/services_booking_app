@@ -1,4 +1,5 @@
-
+import { User, MapPin, Calendar } from 'lucide-react'
+import Image from 'next/image'
 const BookingHistoryList = ({ bookingHistory }) => {
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
