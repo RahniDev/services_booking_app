@@ -76,7 +76,7 @@ const BookingAppointment = ({ children, business }) => {
                 if (resp) {
                     setDate()
                     setSelectedTime('')
-                    toast('Service booked successfully.')
+                    toast('Service booked successfully.')          
                 } else (e) => {
                     toast('Error while creating booking.')
                 }
