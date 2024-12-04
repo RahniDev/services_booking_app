@@ -10,11 +10,11 @@ const MyBookings = () => {
     const [bookingHistory, setBookingHistory] = useState([])
 
     const { user } = useUser()
-    const {isAuthenticated} = useSession()
+    const { isAuthenticated } = useSession()
 
     useEffect(() => {
         isAuthenticated &&
-        getUserBookingHistory()
+           getUserBookingHistory()
     }, [isAuthenticated])
 
     const getUserBookingHistory = () => {
@@ -43,10 +43,13 @@ const MyBookings = () => {
                     <TabsTrigger value="completed">Completed</TabsTrigger>
                 </TabsList>
                 <TabsContent value="booked">
-                    <BookingHistoryList bookingHistory={filterData('booked')} />
+                    <BookingHistoryList
+                        bookingHistory={filterData('booked')}
+                        type="booked" />
                 </TabsContent>
                 <TabsContent value="completed">
-                    <BookingHistoryList bookingHistory={filterData('completed')} />
+                    <BookingHistoryList bookingHistory={filterData('completed')}
+                        type="completed" />
                 </TabsContent>
             </Tabs>
         </div>
