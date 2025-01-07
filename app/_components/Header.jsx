@@ -17,7 +17,7 @@ const Header = () => {
         </ul>
       </div>
       {isAuthenticated ? (
-        <div><p>{user?.name}</p></div>
+        <div><Link href="/sign-in">Logout</Link></div>
       ) : (<div><Link href='/sign-in'>Log In / Sign Up</Link></div>)}
     </div>
   )
